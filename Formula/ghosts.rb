@@ -3,11 +3,23 @@
 class Ghosts < Formula
   desc "Find and stop forgotten dev servers and Docker containers"
   homepage "https://github.com/xamjiang/ghosts"
-  url "https://github.com/xamjiang/ghosts/releases/download/v0.5.0/ghosts_0.5.0_darwin_universal.tar.gz"
-  sha256 "e260561ce7b6a32c37fc1fbd90cce8c93f51096c1583fca31d392e3ddb8b489b"
+  version "0.6.0"
   license "MIT"
 
-  depends_on :macos
+  on_macos do
+    url "https://github.com/xamjiang/ghosts/releases/download/v0.6.0/ghosts_0.6.0_darwin_universal.tar.gz"
+    sha256 "d527f0538491c3f76d8c5d0a91bad0afc9ddc53e324dd22a45a544773d5dcc09"
+  end
+
+  on_linux do
+    if Hardware::CPU.arm?
+      url "https://github.com/xamjiang/ghosts/releases/download/v0.6.0/ghosts_0.6.0_linux_arm64.tar.gz"
+      sha256 "95e68ecccfabd97331fbbcbdf3aac2cb9b98f80a6d0b659ea7395512bf7023c2"
+    else
+      url "https://github.com/xamjiang/ghosts/releases/download/v0.6.0/ghosts_0.6.0_linux_amd64.tar.gz"
+      sha256 "1f090a76681010fbd2024516d9232d796dc938b5e92a87a7c71f5dfa7bf03b71"
+    end
+  end
 
   def install
     bin.install "ghosts"
